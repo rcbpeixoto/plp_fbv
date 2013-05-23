@@ -1,0 +1,65 @@
+http://en.wikipedia.org/wiki/Prolog_syntax_and_semantics
+
+SINTAXE:
+ 	\+	-> Negação
+		, 	-> E
+		; 	-> Ou
+		tab(1) -> Tabulação
+		assert(X) -> Adiciona um novo fato ou cláusula à base de dados (última posição).
+		asserta(X) -> Igual a assert(X), porém adiciona no início
+		assertz(X) -> Igual a assert(X)
+
+
+
+
+VARIÁVEIS:
+		Iniciam com letra maiúscula ou com '_'. Uma variável composta de apenas '_' é dita como sendo anônima ("any term").
+
+ÁTOMOS (ATOMS):
+		Palavras de um modo geral, sem um significado. 
+		Ex.: 
+		x, blue, 'Taco', 'some atom'
+
+TERMO COMPOSTO (COMPOUND TERM):
+		Composição de átomo (functor) e um número de argumentos (termos, na forma de uma lista separada por vírgula). 
+		Ex.: atom('arg1', 234) ou 'Meu_Atom'(2, 3, 4)
+
+
+ARIDADE (ARITY):
+		Número de argumentos de um termo composto*.
+		Ex.:
+		atom 			-> aridade 0
+		atom(1, 2, 3) 	-> aridade 3
+
+
+REGRAS (RULES):
+		Subset da lógica de predicados de primeira ordem. São cláusulas.
+		O corpo de uma regra é composto por predicados.
+		Ex.:
+		Head :- Body
+
+FATOS (FACTS):
+		É uma cláusula sem corpo.
+		Ex.:
+			cat(tom).
+		que é equivalente a:
+			cat(tom) :- true;
+
+
+------------- EXEMPLO: -----------------
+		
+		mother_child(trude, sally).
+		
+		father_child(tom, sally).
+		father_child(tom, erica).
+		father_child(mike, tom).
+		
+		sibling(X, Y)      :- parent_child(Z, X), parent_child(Z, Y).
+		
+		parent_child(X, Y) :- father_child(X, Y).
+		parent_child(X, Y) :- mother_child(X, Y).
+		
+		
+		RESULTADO:
+		?- sibling(sally, erica).
+		Yes
