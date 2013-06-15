@@ -4,3 +4,4 @@
 *.jar
 *.war
 *.ear
+/Código/Java/bin
